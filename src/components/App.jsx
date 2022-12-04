@@ -2,6 +2,7 @@ import { Component } from "react";
 import { Section } from "./Section/Section";
 import { FeedbackOptions } from "./Feedback/FeedbackOptions";
 import { Statistics } from "./Statistics/Statistics";
+import { Notification } from "components/Notification/Notification"
 export class App extends Component {
   state = {
     good: 0,
@@ -29,8 +30,9 @@ export class App extends Component {
     <Section title="Please leave feedback">
         <FeedbackOptions options={['good', 'bad', 'neutral']} onLeaveFeedback={this.onLeaveFeedback}/>
     </Section>
-    <Section title="Statistics">
-         <Statistics good={this.state.good} neutral={this.state.neutral } bad={this.state.bad } total={this.total} positivePercentage={this.positivePercentage}/>
+      <Section title="Statistics">
+        {this.total() === 0 ? <Notification/> : <Statistics good={this.state.good} neutral={this.state.neutral } bad={this.state.bad } total={this.total} positivePercentage={this.positivePercentage}/>}
+         
       </Section>
       </section>
     }
